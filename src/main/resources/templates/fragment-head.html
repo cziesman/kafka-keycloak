@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<span th:fragment="common-head(title)" th:remove="tag">
+        <head>
+            <title th:text="${title}">Page Title</title>
+<!--            <meta http-equiv="refresh" content="2">-->
+            <meta content="no-cache" http-equiv="Cache-Control"/>
+            <meta charset="utf-8"/>
+            <meta content="width=device-width, initial-scale=1" name="viewport"/>
+            <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css"/>
+            <link crossorigin="anonymous"
+                  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+                  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+                  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css"
+                  integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+                  integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+                  rel="stylesheet"/>
+        </head>
+    </span>
+
+<span th:fragment="common-head-datatables(title)" th:remove="tag">
+        <head>
+            <title th:text="${title}">Page Title</title>
+<!--            <meta http-equiv="refresh" content="2">-->
+            <meta content="no-cache" http-equiv="Cache-Control"/>
+            <meta charset="utf-8"/>
+            <meta content="width=device-width, initial-scale=1" name="viewport"/>
+            <link crossorigin="anonymous"
+                  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+                  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+                  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.10.24/dataTables.bootstrap4.css"
+                  integrity="sha512-jhdR0L3jk/OLUVbrXEYGydtwIfgnRqY9jBdwrCSs3rD+EozU0LY5rMq6ABpZfgRd2UIYuX4MEEdmM9fx/9dTaw=="
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css"
+                  integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
+                  rel="stylesheet"/>
+            <link crossorigin="anonymous"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+                  integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+                  rel="stylesheet"/>
+            <link href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css"
+                  rel="stylesheet"
+                  type="text/css"/>
+            <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css"
+                  integrity="sha512-1k7mWiTNoyx2XtmI96o+hdjP8nn0f3Z2N4oF/9ZZRgijyV4omsKOXEnqL1gKQNPy2MTSP9rIEWGcH/CInulptA=="
+                  rel="stylesheet"/>
+            <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css"/>
+        </head>
+    </span>
+
+</html>
+

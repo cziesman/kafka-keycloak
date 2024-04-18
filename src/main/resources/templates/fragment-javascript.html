@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <span th:fragment="common" th:remove="tag">
+        <script crossorigin="anonymous"
+                integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
+        <script type="text/javascript">
+            $('.confirmation-alert').click(function(e) {
+                e.preventDefault();
+                href = $(this).attr('href');
+                bootbox.confirm( {
+                    message: "This action cannot be undone. Are you sure?",
+                    buttons: {
+                        confirm: {
+                            label: 'Confirm'
+                        },
+                        cancel: {
+                            label: 'Cancel'
+                        }
+                    },
+                    callback: function(result) {
+                        if (result) {
+                          window.location = href
+                        }
+                    }
+                });
+            });
+        </script>
+    </span>
+
+    <span th:fragment="common-datatables" th:remove="tag">
+        <script crossorigin="anonymous"
+                integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-p+aLivYlMXnjFoyXgyBqJJWX7YTG1Z1vegVj7dHy6OSClJr6ITdCsWgWnZe0iyLaKGx4aL2SvX/qcRbV45aBcQ=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.js"></script>
+        <script src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"
+        type="text/javascript"></script>
+        <script crossorigin="anonymous"
+                integrity="sha512-6KdCBr5s+FtLkQmT9ckhhousB1IBXxdQNvW7uyVzXTy2iP8gYPeOroZdju09WI7uSrWT0qLyioQr3DKhOs3K7Q=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.js"></script>
+        <script type="text/javascript">
+            $('.confirmation-alert').click(function(e) {
+                e.preventDefault();
+                href = $(this).attr('href');
+                bootbox.confirm( {
+                    message: "This action cannot be undone. Are you sure?",
+                    buttons: {
+                        confirm: {
+                            label: 'Confirm'
+                        },
+                        cancel: {
+                            label: 'Cancel'
+                        }
+                    },
+                    callback: function(result) {
+                        if (result) {
+                          window.location = href
+                        }
+                    }
+                });
+            });
+            $('.confirmation-button-alert').click(function(e) {
+                e.preventDefault();
+                var _this = this;
+
+                bootbox.confirm( {
+                    message: "This action cannot be undone. Are you sure?",
+                    buttons: {
+                        confirm: {
+                            label: 'Confirm'
+                        },
+                        cancel: {
+                            label: 'Cancel'
+                        }
+                    },
+                    callback: function(result) {
+                        if (result) {
+                            $(_this).closest('form').submit();
+                        }
+                    }
+                });
+            });
+        </script>
+    </span>
+
+</html>

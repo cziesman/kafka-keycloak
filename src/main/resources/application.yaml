@@ -1,0 +1,68 @@
+kafka-server: my-cluster-kafka-bootstrap-kafka.apps.cluster-psfnh.dynamic.redhatworkshops.io:443
+keycloak-server: https://keycloak-keycloak.apps.cluster-psfnh.dynamic.redhatworkshops.io
+
+kafka:
+  topic:
+    name: my-topic
+
+keycloak:
+  authorization-grant-type: authorization_code
+  client-id: kafka-client-service-account
+  client-secret: kuKTlbYAZwz00O3nGlK2O0CEbk33YC7H
+  issuer-uri: ${keycloak-server}/auth/realms/kafka-authz
+  scope: openid,offline_access,profile
+  token-uri: ${keycloak-server}/auth/realms/kafka-authz/protocol/openid-connect/token
+  user-name-attribute: preferred_username
+
+management:
+  endpoint:
+    env:
+      show-values: ALWAYS
+    configprops:
+      show-values: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: kafka-keycloak
+  kafka:
+    bootstrap-servers: ${kafka-server}
+    enable-auto-commit: true
+    jaas:
+      enabled: true
+    properties:
+      sasl:
+        mechanism: OAUTHBEARER
+        jaas:
+          config: "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required clientId='${keycloak.client-id}' clientSecret='${keycloak.client-secret}' endpointUri='${keycloak.token-uri}';"
+        login:
+          callback:
+            handler:
+              class: org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler
+        oauthbearer:
+          token:
+            endpoint:
+              url: ${keycloak.token-uri}
+      ssl:
+        truststore:
+          location: src/main/resources/certs/kafka-cluster-ca.p12
+          password: Y5cphBpQPqiJ
+          type: PKCS12
+        keystore:
+          location: src/main/resources/certs/kafka-user.p12
+          password: rrtSZaUJ1vJ4pZxkslxhnU5EnDYIr6pN
+          type: PKCS12
+      security:
+        protocol: SASL_SSL
+
+logging:
+  level:
+    root: INFO
+    org.apache.kafka.common.security: INFO
+    org.apache.kafka.common.security.oauthbearer: WARN
+
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M:%line - %msg%n"
