@@ -62,6 +62,20 @@ In order to allow access to Kafka from outside Openshift, a route needs to be de
 
 The name for the listener on port 9094 is arbitrary. Here we use *external* to indicate that the listener is for clients that are external to Openshift.
 
+A Kafka topic called `my-topic` needs to be created with ten partitions. The YAML should appear similar to the following:
+
+    apiVersion: kafka.strimzi.io/v1beta2
+    kind: KafkaTopic
+    metadata:
+      labels:
+        strimzi.io/cluster: my-cluster
+      name: my-topic
+      namespace: kafka
+    spec:
+      config: {}
+      partitions: 10
+      replicas: 3
+
 The next step is to create a Kafka User using the _AMQ Streams_ operator. Create a `kafka-user` in the `kafka-cluster`. The authentication type must be `tls`. The YAML should appear similar to the following:
 
     apiVersion: kafka.strimzi.io/v1beta2
