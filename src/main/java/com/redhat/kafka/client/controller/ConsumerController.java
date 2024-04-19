@@ -2,7 +2,7 @@ package com.redhat.kafka.client.controller;
 
 import java.util.List;
 
-import com.redhat.kafka.client.service.KafkaReceiver;
+import com.redhat.kafka.client.service.KafkaConsumer;
 import com.redhat.kafka.client.service.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/web")
-public class ReceiverController {
+public class ConsumerController {
 
     @Value("${kafka.topic.name}")
     private String topicName;
 
     @Autowired
-    private KafkaReceiver kafkaReceiver;
+    private KafkaConsumer kafkaConsumer;
 
     @GetMapping({
             "/index", "/", ""
@@ -33,7 +33,7 @@ public class ReceiverController {
     @GetMapping(value = "/list")
     public String list(Model model) {
 
-        model.addAttribute("messages", kafkaReceiver.getMessages());
+        model.addAttribute("messages", kafkaConsumer.getMessages());
 
         return "message-list";
     }
@@ -42,7 +42,7 @@ public class ReceiverController {
     @ResponseBody
     public Wrapper listAsJson() {
 
-        return new Wrapper(kafkaReceiver.getMessages());
+        return new Wrapper(kafkaConsumer.getMessages());
     }
 
     /*

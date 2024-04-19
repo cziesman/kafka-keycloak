@@ -15,9 +15,9 @@ import org.springframework.kafka.listener.AbstractConsumerSeekAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaReceiver extends AbstractConsumerSeekAware {
+public class KafkaConsumer extends AbstractConsumerSeekAware {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaReceiver.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumer.class);
 
     private final List<Message> messages = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class KafkaReceiver extends AbstractConsumerSeekAware {
         seekToTimestamp(System.currentTimeMillis() - 120000L);
     }
 
-    @KafkaListener(id = "KafkaReceiver", autoStartup = "true", topics = {"${kafka.topic.name}"},
+    @KafkaListener(id = "KafkaConsumer", autoStartup = "true", topics = {"${kafka.topic.name}"},
             topicPartitions = @TopicPartition(topic = "${kafka.topic.name}", partitions = "0-9"))
     public void listen(String message) {
 

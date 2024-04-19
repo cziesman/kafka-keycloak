@@ -116,6 +116,66 @@ Create the secret:
 
     oc apply -f src/main/resources/secret.yaml -n kafka
 
+### Client Application
+
+The client application is built using Maven, Spring Boot, and the *spring-kafka* library. It consists of a KafkaConsumer and a KafkaProducer.
+
+#### KafkaConsumer
+
+The `KafkaConsumer` uses the `@KafkaLister` annotation, provided by *spring-kafka*, to implement a listener on the `my-topic` topic.
+
+    @KafkaListener(id = "KafkaConsumer", autoStartup = "true", topics = {"${kafka.topic.name}"},
+            topicPartitions = @TopicPartition(topic = "${kafka.topic.name}", partitions = "0-9"))
+    public void listen(String message) {
+        LOG.info(message);
+    }
+
+#### KafkaProducer
+
+The `KafkaProducer` uses a `KafkaTemplate`, provided by *spring-kafka*, to send messages to the `my-topic` topic.
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    kafkaTemplate.send(topicName, message);
+
+#### Application Configuration
+
+Spring Boot and *spring-kafka* use pre-defined properties for configuration of Kafka clients, TLS, and authentication. These properties allow Kafka, mutual TLS, and Keycloak integration to be configured without the need to write any code. These properties are located in `application.yaml` and in `application-ocp.yaml` (for Openshift deployment).
+
+    spring:
+      application:
+        name: kafka-keycloak
+      kafka:
+        bootstrap-servers: ${kafka-server}
+        enable-auto-commit: true
+        jaas:
+          enabled: true
+        properties:
+          sasl:
+            mechanism: OAUTHBEARER
+            jaas:
+              config: "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required clientId='${keycloak.client-id}' clientSecret='${keycloak.client-secret}' endpointUri='${keycloak.token-uri}';"
+            login:
+              callback:
+                handler:
+                  class: org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler
+            oauthbearer:
+              token:
+                endpoint:
+                  url: ${keycloak.token-uri}
+          ssl:
+            truststore:
+              location: src/main/resources/certs/kafka-cluster-ca.p12
+              password: Y5cphBpQPqiJ
+              type: PKCS12
+            keystore:
+              location: src/main/resources/certs/kafka-user.p12
+              password: rrtSZaUJ1vJ4pZxkslxhnU5EnDYIr6pN
+              type: PKCS12
+          security:
+            protocol: SASL_SSL
+
 ### Local Deployment
 
 The `application.yaml` file needs to be updated with a few values in order for the application to run successfully.
