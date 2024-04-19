@@ -176,6 +176,20 @@ Spring Boot and *spring-kafka* use pre-defined properties for configuration of K
           security:
             protocol: SASL_SSL
 
+#### Web User Interface
+
+The application provides a very simple web interface that displays all messages received on the topic *my-topic*. The interface is built using the Thymeleaf library and uses Ajax to update the display dynamically.
+
+When running locally, the web interface can be viewed at:
+
+    http://localhost:8080/web/list
+
+When deployed to Openshift, the web interface can be viewed using a URL similar to the following:
+
+    http://client-kafka-client.apps.cluster-psfnh.dynamic.redhatworkshops.io/web/list
+
+The actual hostname can be retrieved from the Openshift route for the client application.
+
 ### Local Deployment
 
 The `application.yaml` file needs to be updated with a few values in order for the application to run successfully.
@@ -226,7 +240,9 @@ This command will run an S2I build on Openshift to compile the code, build a JAR
 
 Once the application is running, it can be tested using a command similar to the following:
 
-    curl http://client-kafka-client.apps.cluster-lb1614.lb1614.sandbox2566.opentlc.com/api/send?message=hello
+    curl http://client-kafka-client.apps.cluster-psfnh.dynamic.redhatworkshops.io/api/send?message=hello
+
+The actual hostname can be retrieved from the Openshift route for the client application.
 
 If the message is sent, the response should be `Sent [hello]`.
 
