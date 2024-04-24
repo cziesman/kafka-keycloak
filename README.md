@@ -25,6 +25,7 @@ Use the web console to create a new realm named *kafka-authz*. For the purposes 
 Create two new clients in the *kafka-authz* realm: *kafka-broker-service-account* and *kafka-client-service-account*. For both clients, set the *Access Type* to `confidential`, set *Standard Flow Enabled* to `OFF`, and set *Service Accounts Enabled* to `ON`. Under *Advanced Settings*, set *Access Token Lifespan* to `10 Minutes`. Under the *Credentials* tab for each client, make a note of the *Secret* for each client. Use the following commands with the previously noted client credential secrets to create the corresponding client secrets in Openshift:
 
     oc create secret generic kafka-broker-service-account --from-literal clientSecret=<kafka-broker-service-account-secret> -n kafka
+
     oc create secret generic kafka-client-service-account --from-literal clientSecret=<kafka-client-service-account-secret -n kafka
 
 ### Kafka Configuration
@@ -108,6 +109,7 @@ When running the demo on a local machine, the truststore and keystore files need
 In order to deploy the client application on Openshift, the truststore and keystore must be available via a Secret. Luckily, the openshift-maven-plugin makes this easy. Use the following commands to convert the truststore and keystore files into secrets that can be configured in a template for use by the openshift-maven-plugin:
 
     oc create secret generic dontcare --from-file=./src/main/resources/certs/kafka-cluster-ca.p12 -o yaml --dry-run=client
+
     oc create secret generic dontcare --from-file=./src/main/resources/certs/kafka-user.p12 -o yaml --dry-run=client
 
 Use the YAML output from the commands to create the definition for a Secret named *kafka-client-secret*, which can be found in the file `src/main/resources/secret.yaml`.
@@ -115,6 +117,8 @@ Use the YAML output from the commands to create the definition for a Secret name
 Create the secret:
 
     oc apply -f src/main/resources/secret.yaml -n kafka
+
+    oc apply -f src/main/resources/secret.yaml -n kafka-client
 
 ### Client Application
 
@@ -234,7 +238,7 @@ The openshift-maven-plugin uses the file `src/main/jkube/deploymentconfig.yaml` 
 
 The demo client application is deployed using the following command:
 
-    mvn clean oc:build oc:deploy
+    mvn clean oc:build oc:deploy -Popenshift
 
 This command will run an S2I build on Openshift to compile the code, build a JAR file, create an image, push the image to Openshift, and deploy the image.
 

@@ -1,5 +1,5 @@
-kafka-server: my-cluster-kafka-bootstrap-kafka.apps.cluster-psfnh.dynamic.redhatworkshops.io:443
-keycloak-server: https://keycloak-keycloak.apps.cluster-psfnh.dynamic.redhatworkshops.io
+kafka-server: my-cluster-kafka-bootstrap-kafka.apps.cluster-2rh8c.dynamic.redhatworkshops.io:443
+keycloak-server: https://keycloak-keycloak.apps.cluster-2rh8c.dynamic.redhatworkshops.io
 
 kafka:
   topic:
@@ -8,7 +8,7 @@ kafka:
 keycloak:
   authorization-grant-type: authorization_code
   client-id: kafka-client-service-account
-  client-secret: kuKTlbYAZwz00O3nGlK2O0CEbk33YC7H
+  client-secret: 8dlpxArgJW5nYTBOUOuv1oaAmAl3eU5G
   issuer-uri: ${keycloak-server}/auth/realms/kafka-authz
   scope: openid,offline_access,profile
   token-uri: ${keycloak-server}/auth/realms/kafka-authz/protocol/openid-connect/token
@@ -49,11 +49,11 @@ spring:
       ssl:
         truststore:
           location: src/main/resources/certs/kafka-cluster-ca.p12
-          password: Y5cphBpQPqiJ
+          password: rIdtvH05BYfD
           type: PKCS12
         keystore:
           location: src/main/resources/certs/kafka-user.p12
-          password: rrtSZaUJ1vJ4pZxkslxhnU5EnDYIr6pN
+          password: umRLfrQBqfgmULz23Q4jPGvnG0r1c5Bw
           type: PKCS12
       security:
         protocol: SASL_SSL
